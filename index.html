@@ -4,98 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hello Embed</title>
-<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="node_modules/fullcalendar/dist/fullcalendar.css" />
 <style>
-  #controls {
-    display: flex;
-    justify-content: space-between;
+  #calendar {
+    width: 100%;
+    height: 300px;
   }
-  #controls > div {
-    margin: 10px;
-  }
-  #controls__month {
-    font-weight: bold;
-    font-size: 1.5em;
-  }
+}
 </style>
 </head>
 <body>
-<div class="modal fade" id="details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="details__title"></h4>
-      </div>
-      <div class="modal-body">
-        <div>Start: <span id="details__start">X</span></div>
-        <div>End: <span id="details__end">Y</span></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="controls">
-  <div id="controls__month"></div>
-  <div>
-    <button id="controls__previous" class="btn btn-default">Previous</button>
-    <button id="controls__next" class="btn btn-default">Next</button>
-  </div>
-</div>
-<div id="calendar"></div>
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
-<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="node_modules/moment/min/moment.min.js"></script>
-<script src="node_modules/fullcalendar/dist/fullcalendar.js"></script>
-<script>
-$(document).ready(function() {
-  $.ajax({
-    url: 'https://spreadsheets.google.com/feeds/list/14OrEDhBJd8KuGElFEG9UkYHPB9Mc-EnJpEtDwlhZ-rI/od6/public/values?alt=json-in-script',
-    dataType: 'jsonp',
-    success: function(response) {
-      var events = response.feed.entry.map(function(o) {
-        return ({
-          title: o.gsx$title.$t,
-          start: moment(o.gsx$start.$t, "dddd, MMMM DD, YYYY, h:mm:ss a")
-            .format('YYYY-MM-DDTHH:mm:ss'),
-          end: moment(o.gsx$end.$t, "dddd, MMMM DD, YYYY, h:mm:ss a")
-            .format('YYYY-MM-DDTHH:mm:ss'),
-        });
-      });
-      var $details = $('#details');
-      var $detailsTitle = $('#details__title');
-      var $detailsStart = $('#details__start');
-      var $detailsEnd = $('#details__end');
-      var $month = $('#controls__month');
-      var $previous = $('#controls__previous');
-      var $next = $('#controls__next');
-      var $calendar = $('#calendar');
-      $calendar.fullCalendar({
-        header: false,
-        eventClick: function(calEvent) {
-          $detailsTitle.text(calEvent.title);
-          $detailsStart.text(calEvent.start.format('dddd, MMMM DD, YYYY, h:mm:ss a'));
-          $detailsEnd.text(calEvent.end.format('dddd, MMMM DD, YYYY, h:mm:ss a'));
-          $details.modal('show');
-        },
-        viewRender: function() {
-          var calendar = $calendar.fullCalendar('getDate');
-          $month.text(calendar.format('MMMM YYYY'));
-        },
-        events: events,
-      });
-      $previous.click(function() {
-        $calendar.fullCalendar('prev');
-      });
-      $next.click(function() {
-        $calendar.fullCalendar('next');
-      });
-    }
-  });
-});
-</script>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempor turpis ligula, sit amet varius lacus bibendum quis. Sed maximus sem sed neque euismod venenatis eget euismod est. In vitae augue suscipit, efficitur sem nec, interdum felis. Quisque sed tellus id quam pellentesque pellentesque. Maecenas consequat velit magna, eget pulvinar mi sollicitudin non. Nam aliquet auctor ante et mattis. Fusce ultrices, risus id viverra finibus, turpis ligula viverra lacus, vitae placerat arcu justo ac lectus. Cras vel elementum erat. Cras mauris ante, hendrerit sit amet nisl vel, facilisis facilisis sem. Sed maximus magna in semper pretium. In sapien massa, porta non hendrerit id, pellentesque quis sem.</p>
+<iframe id="calendar" src="http://localhost:8080/calendar.html"></iframe>
+<p>Phasellus eu efficitur ipsum, ut bibendum nisi. Nullam sapien tortor, aliquet malesuada nibh vel, aliquam aliquet dui. Nam et vulputate diam. Donec congue lorem justo, nec egestas lectus luctus nec. Maecenas libero magna, bibendum quis ante nec, lobortis egestas leo. Aenean efficitur mollis dapibus. Curabitur erat ipsum, congue vitae ornare sed, imperdiet vel sem. Vivamus nisl lacus, ornare ut metus sed, pulvinar auctor elit. Vivamus sodales feugiat ultrices. Phasellus vel dolor vitae libero molestie venenatis sed vel felis. Nulla pharetra, ligula eget laoreet blandit, elit neque varius metus, id gravida turpis ipsum ac purus. Maecenas aliquet, libero vitae elementum accumsan, neque sapien commodo justo, ut ultricies purus lacus vitae tellus. Nunc aliquam mattis turpis fringilla vulputate. Duis mattis dictum eleifend.</p>
 </body>
 </html>
