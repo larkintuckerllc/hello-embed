@@ -9,6 +9,7 @@
 <style>
   #controls {
     display: flex;
+    height: 60px;
     justify-content: space-between;
   }
   #controls > div {
@@ -60,6 +61,7 @@ var getQueryVariable = function(variable) {
   }
   return(false);
 };
+var height = Number(getQueryVariable('height')) - 60;
 var key = getQueryVariable('key');
 $(document).ready(function() {
   $.ajax({
@@ -85,6 +87,7 @@ $(document).ready(function() {
       var $calendar = $('#calendar');
       $calendar.fullCalendar({
         header: false,
+        height: height,
         eventClick: function(calEvent) {
           $detailsTitle.text(calEvent.title);
           $detailsStart.text(calEvent.start.format('dddd, MMMM DD, YYYY, h:mm:ss a'));
