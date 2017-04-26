@@ -61,7 +61,6 @@ var getQueryVariable = function(variable) {
   return(false);
 };
 var key = getQueryVariable('key');
-// var KEY = '14OrEDhBJd8KuGElFEG9UkYHPB9Mc-EnJpEtDwlhZ-rI';
 $(document).ready(function() {
   $.ajax({
     url: 'https://spreadsheets.google.com/feeds/list/' + key + '/od6/public/values?alt=json-in-script',
